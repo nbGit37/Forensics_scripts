@@ -25,9 +25,9 @@ def decrypt(encrypted_file_path, keys, ivs):
 
             decrypted_file_path = encrypted_file_path[:-6]  # Supprime la partie ".pachy"
             with open(decrypted_file_path, 'wb') as output_file:
-                output_file.write(decrypted_data)
+                output_file.write(decrypted_data) #écrit les données déchiffrées dans le nouveau fichier
 
-            print(f"\tDECRYPTED : '{encrypted_file_path}' with key-IV : {key.hex()}-{iv.hex()}\n")
+            print(f"\tDECRYPTED : '{encrypted_file_path}' with key-IV : {key.hex()}   -   {iv.hex()}\n")
         except:
             pass
             
