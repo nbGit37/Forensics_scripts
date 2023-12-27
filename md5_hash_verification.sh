@@ -12,6 +12,8 @@ fi
 
 file_csv="$1"
 
+# Lire la première ligne pour passer le noms de colonnes
+IFS=';' read -r first_column_header other_col < "$file_csv"
 
 # Boucle pour lire chaque ligne du fichier CSV
 while IFS=';' read -r file provided_md5 other_hashes; do #other_hashes sert uniquement à ce que seule la colonne 2 soit lue dans hash_md5
@@ -31,7 +33,9 @@ while IFS=';' read -r file provided_md5 other_hashes; do #other_hashes sert uniq
             echo -e "${RED}$file hash NOT matching with the one provided.${NC}"
         fi
     else
-        echo "$file doesn't exist."
+        if [ "$file" != "$first_column_header" ]; then
+            echo "$file doesn't exist."
+        fi
     fi
     echo "-----------------------------------------"
 done < "$file_csv"
